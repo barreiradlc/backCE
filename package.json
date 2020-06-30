@@ -29,6 +29,7 @@
     "nodemailer": "^6.4.10",
     "nodemailer-express-handlebars": "^4.0.0",
     "sqlite3": "^4.2.0",
+    "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.49"
   },
   "devDependencies": {
