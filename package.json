@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "migrate": "npx knex migrate:latest --knexfile knexfile.ts migrate:latest",
-    "start": "nodemon src/server.ts",
+    "start": "npx ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
     "devTs": "ts-node-dev src/server.ts"
   },
