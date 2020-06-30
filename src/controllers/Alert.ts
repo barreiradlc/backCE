@@ -14,14 +14,14 @@ class AlertController {
     // }
 
     async singleAlert(req: Request, res: Response) {
-        const { _id } = req.params;    
+        const { _id } = req.params;
         const alert = await Alert.findById(_id).populate("user", "_id name phone email")
         return res.json(alert)
     }
-    
+
     async listAlerts(req: Request, res: Response) {
         const { needs, latitude, longitude } = req.query;
-        
+
         const parseNeeds = parse.parseStringAsArray(String(needs))
 
         const alerts = await Alert.find({
@@ -61,16 +61,17 @@ class AlertController {
             location,
             user: user_id
         })
+        
 
         return res.json(alert)
 
     }
 
     async updateAlert(req: Request, res: Response) {
-        
+
         const { user_id } = req.headers;
         const { _id, title, description, needs, latitude, longitude } = req.body;
-        
+
         // const alert = await Alert.findById(_id)
 
         const location = await {
@@ -78,7 +79,7 @@ class AlertController {
             coordinates: [longitude, latitude],
         }
 
-        const alert = await Alert.findByIdAndUpdate( _id,{
+        const alert = await Alert.findByIdAndUpdate(_id, {
             title,
             description,
             needs
