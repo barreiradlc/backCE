@@ -15,7 +15,15 @@ class AlertController {
 
     async singleAlert(req: Request, res: Response) {
         const { _id } = req.params;
+
+        
         const alert = await Alert.findById(_id).populate("user", "_id name phone email")
+        return res.json(alert)
+    }
+    
+    async deleteAlert(req: Request, res: Response) {        
+        const { _id } = req.params;
+        const alert = await Alert.findByIdAndDelete(_id)
         return res.json(alert)
     }
 

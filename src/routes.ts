@@ -33,6 +33,7 @@ routes.post('/email', userController.getEmail)
 
 // alerts
 routes.get('/alert/:_id', alertController.singleAlert)
+routes.delete('/alert/:_id', alertController.deleteAlert)
 routes.get('/alerts', alertController.listAlerts)
 routes.post('/alerts', alertController.createAlert)
 routes.put('/alerts', alertController.updateAlert)
