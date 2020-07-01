@@ -22,6 +22,7 @@ routes.get('/', (req, res) => {
 
 
 routes.post('/register', userController.createUser)
+routes.put('/editUser', userController.editUser)
 routes.post('/auth', userController.getUser)
 
 // get params

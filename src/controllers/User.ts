@@ -41,7 +41,7 @@ class UserController {
         }
 
         const user = new User({
-            name: name.trim(),
+            name: name,
             username: username.trim().toLowerCase(),
             email: email.trim().toLowerCase(),
             phone: phone.trim(),
@@ -69,6 +69,70 @@ class UserController {
                 })
             }
         })
+    }
+
+
+    async editUser(req: Request, res: Response) {
+        const { name, email, username, phone, _id } = req.body.user;
+                
+        let errors = []
+
+        console.log('email')
+        
+        const userEmail = await User.findOne({email}).select('email')        
+
+        if(!userEmail || userEmail?.get('email') === email){
+            
+            const userUsername = await User.findOne({username}).select('username')      
+            
+            if(!userUsername || userUsername?.get('username') === username){
+                console.log('phone')
+                
+                const userPhone = await User.findOne({phone})
+                if(!userPhone || userPhone?.get('phone') === phone){
+                    console.log('update User')
+                    const user = await User.findByIdAndUpdate( _id, {
+                        phone,
+                        name,
+                        username,
+                        email
+                    })
+                    
+                    console.log('user')
+                    console.log({
+                        phone,
+                        name,
+                        username,
+                        email
+                    })
+                    console.log(user)
+                    console.log('user')
+                    
+                    return res.json({user:{
+                        _id,
+                        phone,
+                        name,
+                        username,
+                        email
+                    }})
+                    
+                } else {
+                    errors.push({message: 'Telefone já cadastrado'})
+                }
+            } else {
+                errors.push({message: 'Usuário já cadastrado'})                
+            }
+        } else {
+            errors.push({message: 'Email já cadastrado'})                            
+        }
+
+        if(errors.length > 0 ){
+            return res.status(400).json(errors)
+        }
+        
+        errors.push({message: 'Houve um erro desconhecido'})
+
+        return res.status(400).json(errors)
     }
 
     async getUser(req: Request, res: Response) {
