@@ -138,23 +138,27 @@ class UserController {
     async getUser(req: Request, res: Response) {
         const { email } = req.body;
 
+        console.log(email)
+        
         const validEmail = validations.mailValidate(email)
         let savedUser
-
+        
         if (validEmail) {
-
+            
             savedUser = await User.findOne({ email })
             console.log({savedUser})
             if (savedUser !== null) {
                 console.log('Buscar por Email')
                 return res.json(savedUser)
             }
-
+            
         } else {
             
             let username = email
-
+            
             savedUser = await User.findOne({ username: email })
+            console.log('savedUser')
+            console.log(savedUser)
             console.log('Buscar por Usuário')
             console.log(savedUser, email, username)
             if (savedUser !== null) {
