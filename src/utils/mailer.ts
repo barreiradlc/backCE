@@ -10,7 +10,7 @@ class Mailer {
         const transport = nodemailer.createTransport(mailConfig)
 
         const mailOptions = {            
-            from: `Cadastro bem sucedido! <augustodasilva53@gmail.com>`,
+            from: `Equipe Dê a mão -<deamaoapp@gmail.com>`,
             to: email,
             subject: "Cadastro bem sucedido",
             text: `Cadastro bem sucedido, seja bem vindo ${name}`,
